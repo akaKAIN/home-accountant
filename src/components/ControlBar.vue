@@ -9,11 +9,12 @@
           Выберите позицию
         </option>
         <option
-          v-for="position in positions"
-          :key="position.id"
-          :value="position.id"
+          v-for="option in options"
+          v-for="option in options"
+          :key="option.id"
+          :value="option.id"
         >
-          {{ position.name }}
+          {{ option.name }}
         </option>
       </select>
       <input
@@ -21,36 +22,32 @@
         type="number"
         placeholder="Стоимость"
       >
+      <button class="btn" @click="add">Add</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { AddedInputs, PositionItem } from '@/models/ControlBar'
 
 export default {
   name: 'ControlBar',
-  props: {
-    positions: {
-      type: Array<PositionItem>(),
-      default: []
-    }
-  },
-  setup (_, context) {
+  setup () {
+    const options: PositionItem[] | undefined = inject('options')
+    const addItem: AddedInputs | undefined = inject('addItem')
     const selectedPosition = ref<number>(0)
     const inputAmount = ref<number>(10)
     const isEmptyInputs = () => !!(inputAmount.value && selectedPosition.value)
-    const addToExpenses = () => {
+    const add = () => {
       if (isEmptyInputs()) {
-        const data: AddedInputs = {
-          id: selectedPosition.value,
-          amount: inputAmount.value
+        if (addItem) {
+          addItem.id = selectedPosition.value
+          addItem.amount = inputAmount.value
         }
-        context.emit('addToExpenses', data)
       }
     }
-    return { selectedPosition, inputAmount, addToExpenses }
+    return { options, selectedPosition, inputAmount, add }
   }
 }
 </script>
