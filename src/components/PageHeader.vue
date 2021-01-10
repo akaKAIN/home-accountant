@@ -3,20 +3,30 @@
     <div class="user-wrapper">
       <template v-if="userName && isLogin">
         <span class="user-name">{{ userName }}</span>
-        <i class="fas fa-door-open"></i>
+        <i class="fas fa-door-open" />
       </template>
       <span v-else>Гость</span>
     </div>
     <div class="nav-wrapper">
       <div class="container">
-        <router-link class="nav-item" to="/">Home</router-link>
-        <router-link class="nav-item" to="/about">Route#1</router-link>
+        <router-link
+          class="nav-item"
+          to="/"
+        >
+          Home
+        </router-link>
+        <router-link
+          class="nav-item"
+          to="/about"
+        >
+          Route#1
+        </router-link>
       </div>
     </div>
   </header>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'PageHeader',
   props: {

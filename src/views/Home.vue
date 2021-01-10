@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img
+      alt="Vue logo"
+      src="../assets/logo.png"
+    >
+    <control-bar :positions="optionsList" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import ControlBar from '@/components/ControlBar.vue'
+import { PositionItem } from '@/models/ControlBar'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    HelloWorld
+    ControlBar
+  },
+  setup () {
+    const optionsList: PositionItem[] = [
+      { id: 1, name: 'Продукты' },
+      { id: 2, name: 'Аптека' },
+      { id: 3, name: 'Одежда' },
+      { id: 4, name: 'Транспорт' }
+    ]
+    return { optionsList }
   }
 })
 </script>
