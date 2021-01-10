@@ -10,7 +10,6 @@
         </option>
         <option
           v-for="option in options"
-          v-for="option in options"
           :key="option.id"
           :value="option.id"
         >
